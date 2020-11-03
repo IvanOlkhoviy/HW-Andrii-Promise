@@ -17,12 +17,24 @@ function makeDelayPromise(value, delayInMs){
   
 
 function waitForPromise(promise, action){
-    promise.then(action);
+    promise.then(action)
+    .finally(action);
 }
 
 function consumePromise(promise, consumer, handler){
-    promise.then(data => consumer(handler(data)));
+    promise.then(data => consumer(handler(data))
+    .finally(data => consumer(handler(data))));
 }
+
+
+module.exports = {
+    makePromiseResolveWith3,
+     makePromiseRejectWithBoo,
+     makePromiseWithConstructor,
+     makeDelayPromise,
+     waitForPromise,
+     consumePromise,
+   };
   
   
   
